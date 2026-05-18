@@ -1,6 +1,7 @@
 version: "3.7"
 services:
   mariadb:
+    container_name: frappe-mariadb
     image: mariadb:10.8
     command:
       - --character-set-server=utf8mb4
@@ -8,14 +9,16 @@ services:
       - --skip-character-set-client-handshake
       - --skip-innodb-read-only-compressed # Temporary fix for MariaDB 10.6
     environment:
-      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: Parkee2026!@#
     volumes:
       - mariadb-data:/var/lib/mysql
 
   redis:
+    container_name: frappe-redis
     image: redis:alpine
 
   frappe:
+    container_name: frappe-helpdesk
     image: frappe/bench:latest
     command: bash /workspace/init.sh
     environment:
