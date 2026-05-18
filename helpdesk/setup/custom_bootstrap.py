@@ -1,4 +1,4 @@
-import frappe
+kimport frappe
 from textwrap import dedent
 
 
@@ -287,16 +287,7 @@ frappe.ui.form.on("HD Ticket", {
 
 
 def create_web_page():
-    if frappe.db.exists("Web Page", "ticket-tracking"):
-        return
-
-    frappe.get_doc({
-        "doctype": "Web Page",
-        "title": "Ticket Tracking",
-        "route": "ticket-tracking",
-        "published": 1,
-        "content_type": "HTML",
-        "main_section": """\
+    html = """\
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 
@@ -534,7 +525,23 @@ const token=params.get("token");
 if(token){document.getElementById("token_input").value=token;track(token)}
 </script>
 """
-    }).insert(ignore_permissions=True)
+
+    if frappe.db.exists("Web Page", {"route": "ticket-tracking"}):
+        doc = frappe.get_doc("Web Page", {"route": "ticket-tracking"})
+    else:
+        doc = frappe.new_doc("Web Page")
+
+    doc.title = "Ticket Tracking"
+    doc.route = "ticket-tracking"
+    doc.published = 1
+    doc.content_type = "HTML"
+    doc.dynamic_route = 0
+
+    doc.main_section_html = html
+    doc.main_section = html   # optional backup
+
+    doc.save(ignore_permissions=True)
+    frappe.db.commit()
 
 
 def execute():
