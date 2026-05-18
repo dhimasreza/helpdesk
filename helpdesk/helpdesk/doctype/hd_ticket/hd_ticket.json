@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_guest_to_view": 1,
  "allow_import": 1,
  "autoname": "autoincrement",
  "creation": "2023-10-17 14:27:11.078679",
@@ -14,8 +15,12 @@
   "status",
   "priority",
   "status_category",
+  "location",
+  "tracking_token",
+  "tracking_token_expiry",
   "cb00",
   "ticket_type",
+  "ticket_category",
   "agent_group",
   "summary",
   "sb_details",
@@ -111,7 +116,6 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Priority",
-   "link_filters": "[[\"HD Ticket Priority\",\"disabled\",\"=\",0]]",
    "options": "HD Ticket Priority"
   },
   {
@@ -456,7 +460,7 @@
    "fieldtype": "Datetime",
    "label": "Last Customer Response",
    "read_only": 1
-    },
+  },
   {
    "default": "False",
    "fieldname": "raised_outside_working_hours",
@@ -464,13 +468,41 @@
    "label": "Ticket raised outside working hours",
    "read_only": 1,
    "set_only_once": 1
+  },
+  {
+   "fieldname": "tracking_token",
+   "fieldtype": "Data",
+   "label": "Tracking Token",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "tracking_token_expiry",
+   "fieldtype": "Datetime",
+   "label": "Tracking Token Expiry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ticket_category",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Ticket Category",
+   "options": "HD Ticket Category"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "HD Location"
   }
  ],
  "grid_page_length": 50,
  "icon": "fa fa-issue",
  "idx": 61,
  "links": [],
- "modified": "2026-04-30 19:58:44.919596",
+ "modified": "2026-05-13 09:37:45.990151",
  "modified_by": "Administrator",
  "module": "Helpdesk",
  "name": "HD Ticket",

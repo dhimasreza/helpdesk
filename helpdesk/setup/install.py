@@ -12,6 +12,7 @@ from .file import create_helpdesk_folder
 from .ticket_feedback import create_ticket_feedback_options
 from .ticket_type import create_fallback_ticket_type, create_ootb_ticket_types
 from .welcome_ticket import create_welcome_ticket
+from .custom_bootstrap import execute as custom_bootstrap
 
 
 def after_install():
@@ -34,6 +35,7 @@ def after_install():
     add_website_settings_permission()
     add_default_views()
     add_email_template_perms_for_agent_and_agent_manager()
+    custom_bootstrap()
     # Always keep this at last, because sql_ddl makes the db commit
     add_fts_index()
 
