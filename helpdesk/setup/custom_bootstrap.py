@@ -1,4 +1,4 @@
-kimport frappe
+import frappe
 from textwrap import dedent
 
 
